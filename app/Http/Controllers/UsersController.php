@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Users\LoginRequest;
 use App\Http\Requests\Users\StoreRequest;
 use App\User;
 use Illuminate\Http\Request;
@@ -28,5 +29,21 @@ class UsersController extends Controller
         }
 
         return redirect()->route('users.register')->with('danger', 'Une erreur est survenue');
+    }
+
+    public function login()
+    {
+        return view('users.login');
+    }
+
+    public function authenticate(LoginRequest $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('pages.index')->with('success', 'Vous êtes maintenant connecté');
+        }
+
+        return redirect()->route('users.login')->with('danger', 'Une erreur est survenue');
     }
 }

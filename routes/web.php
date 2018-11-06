@@ -15,7 +15,7 @@ Route::get('/inscription', 'UsersController@register')->name('users.register');
 Route::post('/inscription', 'UsersController@store')->name('users.store');
 Route::post('/deconnexion', 'UsersController@logout')->name('users.logout');
 Route::get('/connexion', 'UsersController@login')->name('users.login');
-Route::post('/connexion', 'UsersController@login_post')->name('users.login_post');
+Route::post('/connexion', 'UsersController@authenticate')->name('users.authenticate');
 
 Route::get('/', 'PagesController@index')->name('pages.index');
 
